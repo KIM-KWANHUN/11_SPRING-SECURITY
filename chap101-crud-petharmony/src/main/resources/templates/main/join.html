@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>join</title>
+</head>
+<body>
+    <h1>JOIN</h1>
+    <table border="1">
+        <tr>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>번호</th>
+            <th>입사일</th>
+            <th>성별</th>
+            <th>주소</th>
+            <th>직급</th>
+            <th>부서</th>
+        </tr>
+        <tr th:each="emp : ${empJoin}">
+            <td th:text="${emp.empName}"></td>
+            <td th:text="${emp.empEmail}"></td>
+            <td th:text="${emp.empPhone}"></td>
+            <td th:text="${#dates.format(emp.hireDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${emp.empGender}"></td>
+            <td th:text="${emp.empAddress}"></td>
+            <td th:text="${emp.jobDTO.jobName}"></td>
+            <td th:text="${emp.deptDTO.deptName}"></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.petharmony.DAO.petMapper">
+    <resultMap id="petEmp" type="com.ohgiraffers.petharmony.DTO.petDTO">
+        <id property="empCode" column="emp_code"/>
+        <result property="empName" column="emp_name"/>
+        <result property="empEmail" column="emp_email"/>
+        <result property="empPhone" column="emp_phone"/>
+        <result property="hireDate" column="hire_date"/>
+        <result property="entDate" column="ent_date"/>
+        <result property="empGender" column="emp_gender"/>
+        <result property="empAddress" column="emp_address"/>
+        <result property="jobCode" column="job_code"/>
+        <result property="deptCode" column="dept_code"/>
+        <result property="authority" column="authority"/>
+    </resultMap>
+    <!-- 직원 전체 조회 -->
+    <select id="empAll" resultMap="petEmp">
+        SELECT
+            *
+        FROM
+            TBL_EMP
+    </select>
+    <!-- 직급코드 -->
+    <resultMap id="joinResult" type="com.ohgiraffers.petharmony.DTO.petAllDTO">
+        <id property="empCode" column="emp_code"/>
+        <result property="empName" column="emp_name"/>
+        <result property="empEmail" column="emp_email"/>
+        <result property="empPhone" column="emp_phone"/>
+        <result property="hireDate" column="hire_date"/>
+        <result property="entDate" column="ent_date"/>
+        <result property="empGender" column="emp_gender"/>
+        <result property="empAddress" column="emp_address"/>
+        <result property="jobCode" column="job_code"/>
+        <result property="deptCode" column="dept_code"/>
+        <result property="authority" column="authority"/>
+        <association property="jobDTO" javaType="com.ohgiraffers.petharmony.DTO.jobDTO">
+            <id property="jobCode" column="job_code"/>
+            <result property="jobName" column="job_name"/>
+        </association>
+        <association property="deptDTO" javaType="com.ohgiraffers.petharmony.DTO.deptDTO">
+            <id property="deptCode" column="dept_code"/>
+            <result property="deptName" column="dept_name"/>
+        </association>
+    </resultMap>
+        <select id="empJoin" resultMap="joinResult">
+            SELECT
+            *
+            FROM
+            TBL_DEPT a
+            JOIN
+            TBL_EMP b
+            ON
+            a.dept_code = b.dept_code
+            JOIN
+            TBL_JOB c
+            ON
+            b.job_code = c.job_code;
+        </select>
+        <!-- 사번으로 직원조회 -->
+        <select id="empCode" resultMap="petEmp">
+            SELECT
+                *
+            FROM
+                TBL_EMP
+            WHERE
+                emp_code = #{empCode}
+        </select>
+</mapper>

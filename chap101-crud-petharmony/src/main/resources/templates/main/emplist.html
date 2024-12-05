@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>직원 전체 조회</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>번호</th>
+            <th>입사일</th>
+            <th>성별</th>
+            <th>주소</th>
+            <th>직급</th>
+            <th>부서</th>
+        </tr>
+        <tr th:each="emplist : ${emp}">
+            <td th:text="${emplist.empCode}"></td>
+            <td th:text="${emplist.empEmail}"></td>
+            <td th:text="${emplist.empPhone}"></td>
+            <td th:text="${emplist.hireDate}"></td>
+            <td th:text="${emplist.empGender}"></td>
+            <td th:text="${emplist.empAddress}"></td>
+            <td th:text="${emplist.jobCode}"></td>
+            <td th:text="${emplist.deptCode}"></td>
+        </tr>
+    </table>
+</body>
+</html>
